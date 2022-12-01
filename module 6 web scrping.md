@@ -1,15 +1,15 @@
+```python
 ## CSIS 44620 Web Mining and Applied Natural Language Processing
 ## homework for Module 6
 ## Presented by Ramon Torres
 ## DEC 1, 2022
+```
 
 
 ```python
 import requests
 
 response = requests.get('https://web.archive.org/web/20210327165005/https://hackaday.com/2021/03/22/how-laser-headlights-work/')
-# Uncomment next line to print the full HTML text;  it's long so when done, recomment
-# print(response.text)
 print(response.status_code)
 print(response.headers['content-type'])
 
@@ -22,10 +22,7 @@ print(response.headers['content-type'])
 
 ```python
 from bs4 import BeautifulSoup
-# Uncomment next lines to explore full page contents; it's long so when done, recomment
-# print(soup)
-# print(soup.prettify())
-# parser = 'html5lib'
+
 parser = 'html.parser'
 
 soup = BeautifulSoup(response.text, parser)
@@ -86,10 +83,6 @@ for header in soup.findAll('h1'):
 article_page = requests.get('https://web.archive.org/web/20210327165005/https://hackaday.com/2021/03/22/how-laser-headlights-work/')
 article_html = article_page.text
 
-# pickle works similar to json, but stores information in a binary format
-# json files are readable by humans, pickle files, not so much
-
-# BeautifulSoup objects don't pickle well, so it's appropriate and polite to web developers to cache the text of the web page, or just dump it to an html file you can read in later as a regular file
 import pickle
 with open('python-match.pkl', 'wb') as f:
     pickle.dump(article_page.text, f)
@@ -109,8 +102,7 @@ soup = BeautifulSoup(article_html, parser)
 
 ```python
 article_element = soup.find('article').get_text()
-# Uncomment to see the entire article element html; again, it's long
-# print(article_element)
+
 ```
 
 
@@ -191,7 +183,7 @@ print(article_element).get_text()
 
     AttributeError                            Traceback (most recent call last)
 
-    Input In [104], in <cell line: 1>()
+    Input In [28], in <cell line: 1>()
     ----> 1 print(article_element).get_text()
     
 
@@ -204,7 +196,6 @@ import spacy
 from spacytextblob.spacytextblob import SpacyTextBlob
 
 nlp = spacy.load('en_core_web_sm')
-# why not, let's add some fun sentiment analysis, because we can
 nlp.add_pipe('spacytextblob')
 doc = nlp(article_element)
 print(f'Polarity: {doc._.polarity}')
@@ -313,7 +304,7 @@ for lemma, freq in lemma_freq.most_common(5):
 print(cool_words)
 ```
 
-    {'beam', 'headlight', 'laser', 'technology', 'led'}
+    {'technology', 'laser', 'beam', 'led', 'headlight'}
     
 
 
@@ -424,3 +415,8 @@ print(sentence_length(sentences[0]), sentences[0])
     
 
 
+
+
+```python
+
+```
